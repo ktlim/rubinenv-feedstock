@@ -364,6 +364,22 @@ outputs:
         # grep pin-it output for black dependency
         - pin-it rubin-env-developer | grep "black"
 
+  - name: rubin-env-summit
+    requirements:
+      host:
+        - python
+      run:
+        - {{ pin_subpackage("rubin-env", exact=True) }}
+        - {{ pin_subpackage("rubin-env-rsp", exact=True) }}
+        - {{ pin_subpackage("rubin-env-developer", exact=True) }}
+        # - lsst-ts-idl
+        - nest_asyncio
+        # - sparse_dot_mkl
+    test:
+      commands:
+        # grep pin-it output for nest_asyncio dependency
+        - pin-it rubin-env-rsp | grep "nest_asyncio"
+
   - name: rubin-env-extras
     requirements:
       host:
