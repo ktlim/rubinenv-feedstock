@@ -208,6 +208,22 @@ outputs:
         - '[ $(echo __GXX_ABI_VERSION | ${CXX} -E - | tail -1) == 1016 ]'  # [linux]
         - '[ $(echo __GXX_ABI_VERSION | ${CXX} -E - | tail -1) == 1002 ]'  # [osx]
 
+  - name: rubin-env-astropy-affiliates
+    requirements:
+      host:
+        - python
+      run:
+        - astroplan
+        - astroquery
+        - ginga >=3
+        - photutils >=1.7
+        - pyvo
+        - sbpy
+    test:
+      commands:
+        # grep pin-it output for astroplan dependency
+        - pin-it rubin-env-astropy-affiliates | grep "astroplan"
+
   - name: rubin-env-rsp
     requirements:
       host:
@@ -215,7 +231,7 @@ outputs:
       run:
         - {{ pin_subpackage("rubin-env", exact=True) }}
         # All are from sciplat-lab unless otherwise stated
-        - astroplan # sims
+        - {{ pin_subpackage("rubin-env-astropy-affiliates", exact=True) }}
         - astrowidgets >=0.3
         - awkward
         - awkward-numba
@@ -233,7 +249,6 @@ outputs:
         - gcsfs
         - geoviews
         - gh
-        - ginga >=3
         - graphviz
         - holoviews
         - hvplot
@@ -281,7 +296,6 @@ outputs:
         - python-socketio
         - pythreejs
         - pyviz_comms
-        - pyvo
         - ripgrep
         - sidecar
         - snappy
