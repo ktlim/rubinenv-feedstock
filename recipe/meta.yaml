@@ -391,9 +391,8 @@ outputs:
         - rubin-sim >=0.12.0
     test:
       commands:
-        # grep pin-it output for rubin-env-developer dependency
-        # Can't do rubin-sim due to lack of ARM
-        - pin-it rubin-env-extras | grep "rubin-env-developer"
+        # grep pin-it output for rubin-simdependency
+        - pin-it rubin-env-extras | grep "rubin-sim"
 
 about:
   home: https://github.com/conda-forge/rubinenv-feedstock
